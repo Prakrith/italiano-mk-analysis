@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "italiano_mk_analysis",
+  "project_id": "414bcb13-52de-4e4e-85b4-063ab90471a0"
+}
