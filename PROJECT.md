@@ -24,7 +24,7 @@ Status is `open`, `satisfied`, `not satisfied`, or `not applicable` with a reaso
 | ID | Type | Traces to | Method | Evidence | Status |
 |---|---|---|---|---|---|
 | VER-1 | Verification | R-1, R-4 | Every R-1 topic is covered for both `mouse.ilp` and `human.ilp`. Information the files do not show is recorded as unknown, never inferred from ilastik defaults. HDF5 evidence cites group, dataset or attribute paths; code evidence cites file and line. The `.ilp` label order is reconciled with `LABEL_LIST` in `mk/util/il.py`. R-4 steps name the file and line or module that implements them. Owner spot-checks against the files | Partial: `notes/training-and-inference.md` covers the R-1 training and inference topics for both files; R-4 and the owner spot-check are not done | `open` |
-| VER-2 | Verification | R-2 | The R-2 coverage list is checked item by item against the notes; claims about the `.ilp` and rules files come from inspecting those files, not from memory | Not assessed: R-2 notes (task syy) not written yet | `open` |
+| VER-2 | Verification | R-2 | The R-2 coverage list is checked item by item against the notes; claims about the `.ilp` and rules files come from inspecting those files, not from memory | Drafted: `notes/supervised-ml-fundamentals.md` with an R-2 coverage table; not yet checked item by item, and not independently reviewed | `open` |
 | VAL-1 | Validation | Intended use | Teach-back: the owner explains the R-2 concepts and the pipeline from the notes without the code open | | `open` |
 
 ## Decisions
@@ -33,7 +33,7 @@ Status is `open`, `satisfied`, `not satisfied`, or `not applicable` with a reaso
 - Static inspection of the `.ilp` and `.cppipe` files must not depend on the legacy tools running.
 - Missing information is recorded as unknown, not inferred from ilastik defaults.
 - Candidate modern methods (R-3) wait until training and inference are understood.
-- Further work focuses on `mouse.ilp`. `human.ilp` is already covered in the notes and is run the same way (owner statement), so it gets no further study.
+- Further work focuses on `mouse.ilp`. `human.ilp` is already covered in the notes; it is an interchangeable project file made for human-megakaryocyte images (owner statement), so it gets no further study.
 
 ## Unresolved items
 
@@ -46,7 +46,7 @@ Status is `open`, `closed`, `deferred: <reason>`, or `accepted` as a limitation.
 | U-2 | Legacy tools (ilastik 1.3.x, CellProfiler 3.1.9, old Python and h5py) may not run on this machine | `open` |
 | U-3a | `.ilp` contents: inspection is the work of the training task and is static (read-only, no legacy tools) | `open` |
 | U-3b | `.cppipe` contents have not been inspected; descriptions of the CellProfiler stages come from filenames and code only (later task) | `open` |
-| U-4 | Independent review of the notes not yet done (Codex unavailable) | `open` |
+| U-4 | Independent review of the notes: Codex review run 2026-11-05 (8 findings: 7 at P2, 1 at P3); all 8 addressed in the notes and `notes/inspect_ilp.py` was added so the HDF5 values can be reproduced. Re-review of the fixes not yet done. Codex could not run h5py, so the HDF5-derived values are independently unverified until a reviewer runs the script | `open` |
 
 ## Acceptance
 
