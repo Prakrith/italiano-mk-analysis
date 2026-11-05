@@ -92,7 +92,8 @@ def report(path):
         ds = text(r["datasetId"][()])
         print(f"  {lane} nickname={text(r['nickname'][()])} file={os.path.basename(text(r['filePath'][()]))} "
               f"location={text(r['location'][()])} shape={r['shape'][()].tolist()} dtype={text(r['dtype'][()])} "
-              f"embedded={ds in local} prediction_mask_keys={list(inf[lane]['Prediction Mask'].keys())}")
+              f"embedded={ds in local} embedded_shape={local[ds].shape if ds in local else None} "
+              f"embedded_dtype={local[ds].dtype if ds in local else None} prediction_mask_keys={list(inf[lane]['Prediction Mask'].keys())}")
     print("  local_data datasets", len(local))
     return f
 

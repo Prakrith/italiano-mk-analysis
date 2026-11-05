@@ -39,7 +39,7 @@ Given a phase-contrast image, decide for every pixel whether it is background, c
 | Output | the trees, saved inside the `.ilp` (`ClassifierForests/Forest*/Tree_*`) | one probability image per class |
 | Changes the model? | yes | the wrapper contains no fitting step; whether the ilastik executable writes anything back to the `.ilp` is unverified |
 
-*(file: notes sections 5 and 6; `il.py:40-46` calls `--headless --export_source=probabilities stage 2 --project=<ILP>`)*. The repository code contains no explicit fitting operation; the trained trees are stored in the `.ilp` and the wrapper hands that file to an external executable. What the executable does with the project beyond predicting (for example saving) is not verified. Training was done interactively in the GUI (`docs/Setup.md:3-11`), per the repository's own instructions.
+*(file: notes sections 5 and 6; `il.py:40-46` calls `--headless --export_source=probabilities stage 2 --project=<ILP>`)*. The repository code contains no explicit fitting operation; the trained trees are stored in the `.ilp` and the wrapper hands that file to an external executable. What the executable does with the project beyond predicting (for example saving) is not verified. The documented training procedure uses the ilastik GUI (`docs/Setup.md:3-11`); the files do not show how these particular models were actually trained.
 
 ## 6. Probabilities versus final decisions
 

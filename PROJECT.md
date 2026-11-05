@@ -46,7 +46,7 @@ Status is `open`, `closed`, `deferred: <reason>`, or `accepted` as a limitation.
 | U-2 | Legacy tools (ilastik 1.3.x, CellProfiler 3.1.9, old Python and h5py) may not run on this machine | `open` |
 | U-3a | `.ilp` contents: inspection is the work of the training task and is static (read-only, no legacy tools) | `open` |
 | U-3b | `.cppipe` contents have not been inspected; descriptions of the CellProfiler stages come from filenames and code only (later task) | `open` |
-| U-4 | Independent review of the notes: Codex review run 2026-11-05 (8 findings: 7 at P2, 1 at P3); all 8 addressed in the notes and `notes/inspect_ilp.py` was added so the HDF5 values can be reproduced. Re-review of the fixes not yet done. Codex could not run h5py, so the HDF5-derived values are independently unverified until a reviewer runs the script | `open` |
+| U-4 | Independent review of the notes: Codex review run 2026-11-05 (8 findings), fixes committed (93a774c), re-review run the same day. The re-review ran `notes/inspect_ilp.py` in a prebuilt virtualenv and independently verified the annotation counts, feature and classifier values and embedded-image shapes; it found 3 smaller points (1 at P2, 2 at P3), fixed in the next commit; a third review pass was declined by the owner | `open` |
 
 ## Acceptance
 
