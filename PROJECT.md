@@ -12,10 +12,10 @@ Owner's learning and planning. The reimplementation in Phase 2 would analyze pha
 
 ## Requirements
 
-- **R-1.** A written explanation of training and inference in the legacy pipeline: features, labels, classifier, Autocontext stages and training annotations (from the `.ilp` files), and the headless inference call and probability outputs (from `mk/util/il.py`), citing files and lines.
-- **R-2.** A written explanation of the supervised-ML fundamentals behind that training and inference, at a level the owner can explain.
+- **R-1.** A written explanation of training and inference in the legacy pipeline, covering both `ilps/mouse.ilp` and `ilps/human.ilp`: features and scales, labels, classifier, Autocontext stages and training annotations (from the `.ilp` files), and the headless inference call and probability outputs (from `mk/util/il.py`), citing files and lines. "Annotation counts" means labeled pixels per class, per image and per stage. Image references stored in a file are kept separate from images actually available.
+- **R-2.** A written explanation of the supervised-ML fundamentals behind that training and inference, at a level the owner can explain. Coverage list: training examples and targets; features; fit versus inference; probabilities versus final decisions; Autocontext; generalization.
 - **R-4.** (Lower priority, after R-1 and R-2.) The end-to-end data flow and the CellProfiler and CPA-rules stages, citing the files that define each step.
-- **R-3.** A list of the pipeline's limitations and open questions, and candidate modern methods for Phase 2, each marked as a hypothesis until tested.
+- **R-3.** (Deferred until training and inference are understood.) A list of the pipeline's limitations and open questions, and candidate modern methods for Phase 2. Observed facts, open questions and hypotheses are kept in separate lists; every candidate method is a hypothesis until tested.
 
 ## Criteria
 
@@ -23,13 +23,17 @@ Status is `open`, `satisfied`, `not satisfied`, or `not applicable` with a reaso
 
 | ID | Type | Traces to | Method | Evidence | Status |
 |---|---|---|---|---|---|
-| VER-1 | Verification | R-1, R-4 | Each step names the file and line or module that implements it; owner spot-checks against the code | | `open` |
-| VER-2 | Verification | R-2 | Claims about the .ilp and rules files come from inspecting those files, not from memory | | `open` |
-| VAL-1 | Validation | Intended use | Owner can explain the pipeline from the notes without the code open | | `open` |
+| VER-1 | Verification | R-1, R-4 | Every R-1 topic is covered for both `mouse.ilp` and `human.ilp`. Information the files do not show is recorded as unknown, never inferred from ilastik defaults. HDF5 evidence cites group, dataset or attribute paths; code evidence cites file and line. The `.ilp` label order is reconciled with `LABEL_LIST` in `mk/util/il.py`. R-4 steps name the file and line or module that implements them. Owner spot-checks against the files | Partial: `notes/training-and-inference.md` covers the R-1 training and inference topics for both files; R-4 and the owner spot-check are not done | `open` |
+| VER-2 | Verification | R-2 | The R-2 coverage list is checked item by item against the notes; claims about the `.ilp` and rules files come from inspecting those files, not from memory | Not assessed: R-2 notes (task syy) not written yet | `open` |
+| VAL-1 | Validation | Intended use | Teach-back: the owner explains the R-2 concepts and the pipeline from the notes without the code open | | `open` |
 
 ## Decisions
 
 - Tasks and this record live in the public code repository, so their text is written to be published; nothing private is recorded in them.
+- Static inspection of the `.ilp` and `.cppipe` files must not depend on the legacy tools running.
+- Missing information is recorded as unknown, not inferred from ilastik defaults.
+- Candidate modern methods (R-3) wait until training and inference are understood.
+- Further work focuses on `mouse.ilp`. `human.ilp` is already covered in the notes and is run the same way (owner statement), so it gets no further study.
 
 ## Unresolved items
 
@@ -37,9 +41,12 @@ Status is `open`, `closed`, `deferred: <reason>`, or `accepted` as a limitation.
 
 | ID | Item | Status |
 |---|---|---|
-| U-1 | No labeled ground truth has been located; the data location and any manual annotations are unknown | `open` |
+| U-1a | Training annotations and source-image availability: which images the annotations refer to, and whether those images are available | `open` |
+| U-1b | Independent evaluation ground truth: no labeled ground truth separate from the training annotations has been located; its location and any manual annotations are unknown | `open` |
 | U-2 | Legacy tools (ilastik 1.3.x, CellProfiler 3.1.9, old Python and h5py) may not run on this machine | `open` |
-| U-3 | `.ilp` and `.cppipe` contents have not been inspected; descriptions of Autocontext and stage structure come from filenames and code only | `open` |
+| U-3a | `.ilp` contents: inspection is the work of the training task and is static (read-only, no legacy tools) | `open` |
+| U-3b | `.cppipe` contents have not been inspected; descriptions of the CellProfiler stages come from filenames and code only (later task) | `open` |
+| U-4 | Independent review of the notes not yet done (Codex unavailable) | `open` |
 
 ## Acceptance
 
