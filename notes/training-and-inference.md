@@ -205,9 +205,11 @@ Observed per lane at `Input Data/infos/lane<NNNN>/Raw Data/`: `nickname`, `fileP
 
 ## 9. Open points
 
-- Exported channel order and dtype of `probabilities stage 2` (needs a run or the ilastik source).
-- Why mouse.ilp stores 8 forests while the factory records 4; meaning of VIGRA option codes.
-- Meaning of stage-1 label names `white`, `black`, `gray`, `background_cell`.
-- Whether the embedded images match the original TIFs; where originals and any independent ground truth are (tasks ce4, U-1a, U-1b).
-- Whether ilastik 1.3.3post2 (config) loads these 1.3.2rc2 projects unchanged.
-- Independent review of these notes: not yet done (U-4 in `PROJECT.md`).
+Status after the source study (`notes/ilastik-internals.md`, section 14 there has the detail). "From source" means read in ilastik 1.3.2rc2 source and not confirmed by running it.
+
+- Exported channel order and dtype of `probabilities stage 2`: **resolved from source**: `(y, x, class)`, `float32`, nominal range 0 to 1, class index = label - 1; `il.py` passes no ilastik export-normalization options and `mouse.ilp` stores none, so ilastik writes unscaled floats (the later PNG conversion with `skimage.img_as_uint` at `il.py:54` is a separate step).
+- Why mouse.ilp stores 8 forests while the factory records 4: forest counts match the default worker-cap arithmetic (8 = cap; 4 would match a 4-worker pool, a possible explanation only) and option codes decoded; why the saved pickle says 4 for mouse is still **unknown**.
+- Meaning of stage-1 label names `white`, `black`, `gray`, `background_cell`: the code uses only the class index. Owner statement (2026-11-06, not checkable in the files): they are empirical descriptions of what was seen in the image while labeling; stage 1 was labeled with single-pixel seeds to define boundaries precisely and limit class bleeding, and stage 2 with dense regional brush strokes to give morphological context and spatial continuity. Observation from `mouse.ilp` (read-only): stored label blocks hold a median of 5 labeled pixels per block in stage 1 (172 pixels, 34 blocks, max 18) and 8 in stage 2 (285 pixels, 35 blocks, max 24). Stage 2 has more labeled pixels, but nothing in the file shows dense regional strokes; block geometry is storage, not brush shape, so the stroke style stays the owner's account only.
+- Whether the embedded images match the original TIFs; where originals and any independent ground truth are (tasks ce4, U-1a, U-1b): still open.
+- Whether ilastik 1.3.3post2 (config) loads these 1.3.2rc2 projects unchanged: not run. For the Autocontext stage-2 input and 8-bit images the code compared is equivalent in both versions; loading of the whole project was not compared.
+- Independent review of the source notes: not yet done (U-4 in `PROJECT.md`).
