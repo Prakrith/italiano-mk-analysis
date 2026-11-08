@@ -160,7 +160,7 @@ Between the two tags the Autocontext workflow changed what it feeds stage 2: `1.
 | Exported channel order and dtype | **Resolved from source** (section 12): `(y, x, class)` float32 in [0, 1], class index = label - 1; holds for `mouse.ilp` because its stored export settings carry no range, dtype or axis-order override; not run. |
 | Why mouse.ilp stores 8 forests while the factory records 4 | **Partly resolved**: option codes decoded and forest count explained by section 7; *why the saved pickle says 4* is still **unknown**. |
 | Meaning of stage-1 label names | The code ignores them (section 9). Owner's account: empirical descriptions of what was seen; stage 1 labeled with single-pixel seeds, stage 2 with dense regional strokes (see training notes section 9 for what the file shows). |
-| Whether the embedded images match the original TIFs; where originals and ground truth are | Still open (tasks `ce4`, U-1a, U-1b). |
+| Whether the embedded images match the original TIFs; where originals and ground truth are | Cannot be checked: owner statement that the originals and ground truth do not exist; accepted as a limitation (U-1a, U-1b). |
 | Whether 1.3.3post2 loads these projects unchanged | **Partly resolved**: for the Autocontext stage-2 input and 8-bit data, equal in the constructs compared (section 10); project loading and the whole file set were not diffed line by line. Unconfirmed by running. |
 | Independent review of the notes | Codex review run (see U-4 and VER-3 in `PROJECT.md`); not reviewed by the owner. |
 | Tree stopping rule, VIGRA eigenvalue ordering, VIGRA/fastfilters build bundled | Still **unknown** (sections 5, 3, U-5). |

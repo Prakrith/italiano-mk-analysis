@@ -145,4 +145,4 @@ VAL-1 question 6. Made-up scores for two pixels. `il.py` writes the scores as 16
  mk score > 0.7              not mk         not mk
 ```
 
-Different rules give different segmentations from the same scores. A 0.5 threshold is just a rule; reading it as "more likely than not" would require calibrated scores, which has not been shown for these models. Turning the resulting pixel mask into individual objects is a further step; which tool does it and how is unknown until the CellProfiler files are inspected (tasks no9 and hgf).
+Different rules give different segmentations from the same scores. A 0.5 threshold is just a rule; reading it as "more likely than not" would require calibrated scores, which has not been shown for these models. In the legacy pipeline, `pipelines/mouse.cppipe` (CellProfiler) applies a manual threshold of 0.5 to the opened mk map minus the background and pplt maps (clipped to 0 to 1), then identifies objects *(file)*; see `notes/cellprofiler-and-rules.md` for the outline.
